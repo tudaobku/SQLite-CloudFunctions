@@ -6,14 +6,9 @@ export const onSupplierCreate = functions.database
 .ref('Supplier/List/{phone}')
 .onCreate(async (snapshot, context) => {
     const countRef = snapshot.ref.parent?.parent?.child("number")
-    await countRef?.transaction(number => {
+    return countRef?.transaction(number => {
         return number + 1
     })
-    return countRef?.once("value")
-    .then(function(dataSnapshot){
-        const number = dataSnapshot.val()
-        return snapshot.ref.update({supplierID: String(number)})
-    });
 })
 export const onSupplierDelete = functions.database
 .ref('Supplier/List/{phone}')

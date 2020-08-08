@@ -46,8 +46,7 @@ export const onFoodCreate = functions.database
     })
     return countRef?.once("value")
     .then(function(dataSnapshot){
-        const number = dataSnapshot.val()
-        return snapshot.ref.update({foodID: String(number), star: "0", status:"0"})
+        return snapshot.ref.update({star: "0", status:"0"})
     });
 })
 export const onFoodDelete = functions.database
